@@ -63,10 +63,14 @@
     );
 
     //Create Route
-    app.post("/listings",async (req,res)=>{
-        const newListing = new Listing(req.body.listing);
-        await newListing.save();
-        res.redirect("/listings");
+    app.post("/listings",async (req,res,next)=>{
+        try {
+            const newListing = new Listing(req.body.listing);
+            await newListing.save();
+            res.redirect("/listings");
+        } catch (err) {
+            next(err);
+        }
     });
 
     //Edit Route
@@ -90,6 +94,10 @@
         console.log(deletedListing);
         res.redirect("/listings");
     });
+
+    app.use((err,req,res,next)=>{
+        res.send("Something Went Wrong");
+    })
 
 
     app.listen(8080,()=>{

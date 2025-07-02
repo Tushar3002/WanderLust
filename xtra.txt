@@ -1,0 +1,5 @@
+//PART 3
+
+add required and novalidate class="needs-validation" in form for bootstrap and get the docs in script.js
+
+look int bootstrap doc validate 
